@@ -9,7 +9,7 @@ Se indican los pasos del tutorial más interesantes:
   1. Se crea el proyecto con el comando `truffle unbox pet-shop`
   ![Captura 1](screenshots/screen001.png "Captura 1")
   2. Se crea el contrato Adoption con las funciones correspondientes
-  3. Hemos compilado el contrato con el comando `truffle compile`
+  3. Se ha compilado el contrato con el comando `truffle compile`
   4. Se crea el fichero para migrar el contrato de Adoption y se ejecuta `truffle migrate`
   5. Previo al paso anterior, se ha tenido que ejecutar la aplicación Ganache en el sistema para simular una red Ethereum.
   ![Captura 2](screenshots/screen002.png "Captura 2")
@@ -75,7 +75,7 @@ Para desplegar este contrato, necesitamos previamente la dirección de un contra
 
 Además, es necesario indicar al constructor del contrato la dirección donde se va a depositar los Ethers en caso de que el proyecto alcance el objetivo, así como especificar la cantidad buscada, la duración del crowdsale y el precio de cada token en ether.
 
-En nuestro caso hemos utilizado los siguientes parámetros:
+En nuestro caso se ha utilizado los siguientes parámetros:
 - `address ifSuccessfulSendTo` -> 0x83fced091b8d4f76eea90e1f113621d486bbeaed
 - `uint fundingGoalInEthers` -> 40
 - `uint durationInMinutes` -> 3
@@ -98,6 +98,11 @@ Además, el owner podrá dar de alta los distintos miembros del congreso, así c
 Por otra parte, los miembros del congreso tendrán el método `newProposal()` para crear propuestas que serán votadas por otros miembros a través de la función `vote()`.
 
 Por último, la acción `executeProposal()` podrá ser ejecutada por cualquiera y servirá para valorar si una propuesta ha sido aprobada por la mayoría establecida o no.
+
+
+#### Probando truffle
+
+Como última tarea, se ha creado un proyecto nuevo con el comando `truffle init`, y se han añadido los contratos anteriores. En primer lugar, se han compilado los ficheros de los contratos con el comando `truffle compile` y se ha generado la carpeta `/build`. También se ha creado el fichero de migrations asociado a cada contrato y se ha desplegado en Ganache los distintos contratos.
 
 
 ### Autor
