@@ -56,7 +56,48 @@ Se indican los pasos del tutorial más interesantes:
 
 ### **Actividad 2** - Ejercicios de Solidity
 
-+ 5 preguntas (la ultima extra)
+Se ha ejecutado Ganache en la máquina virtual de Ubuntu para desplegar una red Ethereum local.
+
+Asimismo, se han añadido los 3 smart contract en el IDE Remix y se ha configurado para que apunte a la red de Ganache `http://127.0.0.1:7545`
+
+#### Issue your token
+
+Una vez compilado el contrato con Remix, podemos desplegarlo en la red de Ganache indicandole el valor del parámetro `uint initialSupply`. Dicho valor, se almacenará en la variable `balanceOf` reservada para la dirección de la cuenta del creador del contrato (`msg.sender`).
+
+A partir de ese momento, el contrato queda accesible en la red, y la cuenta del owner, podrá hacer uso de la función `transfer()` para enviar tokens a otras cuentas, siempre y cuando tenga disponible.
+
+El resto de cuentas que vayan obteniendo tokens a través de transferencias, podrán hacer uso también de dicha función.
+
+
+#### Kickstart your project
+
+Para desplegar este contrato, necesitamos previamente la dirección de un contrato de tipo `token`. En este caso la dirección del contrato es: `0x9161468b04ebe14550dc1bf64bbad8de080c4342`
+
+Además, es necesario indicar al constructor del contrato la dirección donde se va a depositar los Ethers en caso de que el proyecto alcance el objetivo, así como especificar la cantidad buscada, la duración del crowdsale y el precio de cada token en ether.
+
+En nuestro caso hemos utilizado los siguientes parámetros:
+- `address ifSuccessfulSendTo` -> 0x83fced091b8d4f76eea90e1f113621d486bbeaed
+- `uint fundingGoalInEthers` -> 40
+- `uint durationInMinutes` -> 3
+- `uint etherCostOfEachToken` -> 1 
+- `address addressOfTokenUsedAsReward` -> 0x9161468b04ebe14550dc1bf64bbad8de080c4342
+    
+Una vez creado el contrato, los participantes tienen 3 minutos para llegar al objetivo de vender los 100 ethers. Para ello, los participantes envían ethers a la dirección del contrato y a partir del momento en el que se llegue al objetivo, si también ha expirado el tiempo de duración del crowsale, el beneficiario tiene la opción de retirar el dinero.
+
+En caso contrario, si no se llega al objetivo, los participantes podrán accionar sobre el contrato para recuperar el dinero invertido.
+
+
+#### Start your organization
+
+En este fichero se definen 2 contratos "padre" que son `owned` y `tokenRecipient`, los cuales van a ser heredados por el contrato llamado `Congress`.
+
+El creador del contrato será almacenado como `owner` del mismo y podrá delegar su rol a otra dirección cuando él desee a través del método `transferOwnership()`. En la creación, tendrá que indicar las reglas del congreso: minutos de un debate, quorum mínimo...
+
+Además, el owner podrá dar de alta los distintos miembros del congreso, así como borrarlos. Estas acciones solo las podrá hacer él. Además, podrá cambiar las reglas configuradas en el congreso siempre que quiera.
+
+Por otra parte, los miembros del congreso tendrán el método `newProposal()` para crear propuestas que serán votadas por otros miembros a través de la función `vote()`.
+
+Por último, la acción `executeProposal()` podrá ser ejecutada por cualquiera y servirá para valorar si una propuesta ha sido aprobada por la mayoría establecida o no.
 
 
 ### Autor
